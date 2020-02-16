@@ -18,6 +18,7 @@ env:
   global:
     - ABI=x86_64
     - ADB_INSTALL_TIMEOUT=8
+    - API=28
     - ANDROID_HOME=${HOME}/android-sdk
     - ANDROID_TOOLS_URL="https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip"
     - EMU_FLAVOR=default # use google_apis flavor if no default flavor emulator
