@@ -1,15 +1,22 @@
 
 # From https://medium.com/@fawwazyusran/how-to-travis-ci-working-for-android-api-level-28-2fde7292813c
+# and https://github.com/ankidroid/Anki-Android/blob/master/.travis.yml
 
 language: android
 sudo: required
 jdk: oraclejdk8
+dist: bionic
 
 env:
   global:
   - ANDROID_API_LEVEL=28
   - ANDROID_BUILD_TOOLS_VERSION=28.0.3
-  - ANDROID_ABI=armeabi-v7a
+  - ANDROID_HOME=${HOME}/android-sdk
+  - ABI=x86_64
+  - EMU_FLAVOR=default # use google_apis flavor if no default flavor emulator
+  - TOOLS=${ANDROID_HOME}/tools
+  # PATH order is incredibly important. e.g. the 'emulator' script exists in more than one place!
+  - PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
 
 android:
   components:
@@ -26,6 +33,31 @@ before_install:
   - touch $HOME/.android/repositories.cfg
   - yes | sdkmanager "platforms;android-28"
   - yes | sdkmanager "build-tools;28.0.3"
+
+install:
+  # Download required emulator tools
+  - echo y | sdkmanager --no_https "platforms;android-$API" >/dev/null # We need the API of the emulator we will run
+  - echo y | sdkmanager --no_https "emulator" >/dev/null
+  - echo y | sdkmanager --no_https "system-images;android-$ANDROID_API_LEVEL;$EMU_FLAVOR;$ABI" >/dev/null # install our emulator
+
+  # Set up KVM on linux for hardware acceleration. Manually here so it only happens for emulator tests, takes ~30s
+  - sudo -E apt-get -yq --no-install-suggests --no-install-recommends install bridge-utils libpulse0 libvirt-bin qemu-kvm virtinst ubuntu-vm-builder
+  - sudo adduser $USER libvirt
+  - sudo adduser $USER kvm
+
+  # Create an Android emulator
+  - echo no | avdmanager create avd --force -n test -k "system-images;android-$ANDROID_API_LEVEL;$EMU_FLAVOR;$ABI" -c 10M
+  - |
+    EMU_PARAMS="-verbose -no-snapshot -no-window -camera-back none -camera-front none -selinux permissive -qemu -m 2048"
+    EMU_COMMAND="emulator"
+    # This double "sudo" monstrosity is used to have Travis execute the
+    # emulator with its new group permissions and help preserve the rule
+    # of least privilege.
+    sudo -E sudo -u $USER -E bash -c "${ANDROID_HOME}/emulator/${EMU_COMMAND} -avd test -no-audio ${EMU_PARAMS} &"
+  # Wait for emulator to be ready
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
+
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
