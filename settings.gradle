@@ -1,2 +1,2 @@
-rootProject.name = 'PortlandStateAndroid'
-include ':FamilyTree'
+include ':app'
+rootProject.name='Family Tree'
