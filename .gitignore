@@ -76,3 +76,6 @@ lint/tmp/
 
 # emacs backups
 *.~*~
+
+# Mac OS File System
+.DS_Store
