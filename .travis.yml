@@ -128,9 +128,9 @@ install:
   - source ~/.install-jdk-travis.sh
 
 script:
-  - if [ "$UNIT_TEST" = "TRUE" ]; then ./gradlew jacocoUnitTestReport; fi
+  - if [ "$UNIT_TEST" = "TRUE" ]; then ./gradlew build connectedCheck; fi
   - if [ "$LINT" = "TRUE" ]; then ./gradlew lint; fi
-  - if [ "$API" != "NONE" ]; then ./gradlew jacocoAndroidTestReport; fi
+  - if [ "$API" != "NONE" ]; then ./gradlew build connectedCheck; fi
 
 after_success:
   - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash tools/upload-codacy-report.sh; fi
