@@ -1,4 +1,4 @@
-package edu.pdx.cs410j.whitlock.familytree;
+package edu.pdx.cs410j.android.examples;
 
 import android.os.Bundle;
 
