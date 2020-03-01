@@ -4,4 +4,5 @@
     <string name="multiple_lines_of_text">When in the Course of human events, it becomes necessary for one people to dissolve the political bands which have connected them with another, and to assume among the powers of the earth, the separate and equal station to which the Laws of Nature and of Nature\'s God entitle them, a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation.</string>
     <string name="this_is_a_text_view">This is a text view!</string>
     <string name="edit_text_hint">This Text Can be edited</string>
+    <string name="text_examples">Text Examples</string>
 </resources>

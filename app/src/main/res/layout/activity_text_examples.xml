@@ -9,11 +9,23 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <Button
-        android:id="@+id/TextExamples"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_examples"
+        android:text="@string/this_is_a_text_view"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/multiple_lines_of_text"
+        android:lines="4"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/edit_text_hint"
         />
 
 </LinearLayout>
