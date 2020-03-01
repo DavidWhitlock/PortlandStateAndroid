@@ -1,4 +1,4 @@
-package edu.pdx.cs410j.android.examples;
+package edu.pdx.cs410J.android.examples;
 
 import android.os.Bundle;
 
