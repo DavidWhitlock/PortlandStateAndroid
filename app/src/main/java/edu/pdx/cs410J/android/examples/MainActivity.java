@@ -63,4 +63,9 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void launchDateStorageExample(View view) {
+        Intent intent = new Intent(this, InternalDataStorageExample.class);
+        startActivity(intent);
+    }
 }

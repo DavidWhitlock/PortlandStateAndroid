@@ -5,4 +5,14 @@
     <string name="this_is_a_text_view">This is a text view!</string>
     <string name="edit_text_hint">This Text Can be edited</string>
     <string name="text_examples">Text Examples</string>
+    <string name="data_storage_instructions">Enter some text below and save it to a file</string>
+    <string name="load_file">Load File</string>
+    <string name="save_file">Save File</string>
+    <string name="file_text_hint">Enter text to save to file here</string>
+    <string name="file_name_hint">Enter File Name</string>
+    <string name="internal_data_storage_example">Internal Data Storage Example</string>
+    <string name="no_file_specified">Please specify a file name</string>
+    <string name="file_does_not_exist">File \"%1$s\" does not exist</string>
+    <string name="empty_file_not_allowed">Enter text to save to file</string>
+    <string name="file_save_successful">Successfully saved \"%1$s\"</string>
 </resources>
